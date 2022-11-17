@@ -34,4 +34,10 @@ public class HomeController {
 		
 		return "board_list";
 	}
+	
+	@RequestMapping("member_join")
+	public String member_join() {
+		
+		return "member_join";
+	}
 }

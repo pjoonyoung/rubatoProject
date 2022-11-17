@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_left.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_view_main.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_write_main.css">
 </head>
 <body>
   <div id="wrap">
@@ -41,8 +41,8 @@
         </div>
         <div class="clear"></div>
         <div id="join_search">
-          <img src="${pageContext.request.contextPath}/resources/img/btn_join.gif">
-          <img src="${pageContext.request.contextPath}/resources/img/btn_search.gif">
+          <img src="img/btn_join.gif">
+          <img src="img/btn_search.gif">
         </div>
       </article> <!-- login box 끝 -->
       <nav id="sub_menu"> <!-- 서브 메뉴 시작 -->
@@ -65,28 +65,32 @@
     <main>
       <section id="main">
         <img src="${pageContext.request.contextPath}/resources/img/comm.gif">
-        <h2 id="board_title">자유게시판</h2>
-        <div id="view_title_box">
-          <span id="boardTitle">까스통의 선물인 보드카가 정말 독하네요!!!</span>
-          <span id="info">루바토 | 조회수 : 208 | 2022-10-05 (09:21)</span>
-        </div>
-        <p id="view_content">
-          까스통님 고맙습니다. <br>
-          까스통님 고맙습니다. <br>
-          까스통님 고맙습니다. <br>
-          까스통님 고맙습니다. <br>
-          까스통님 고맙습니다. <br>
-        </p>
-        <div id="comment_box">
-          <img id="title_comment" src="${pageContext.request.contextPath}/resources/img/title_comment.gif">
-          <textarea></textarea>
-          <img id="ok_ripple" src="${pageContext.request.contextPath}/resources/img/ok_ripple.gif">
-        </div>
+        <h2 id="board_title">루바토 회원 가입</h2>
+        <div id="write_title"><h2>회원 정보 입력</h2></div>
+        <form action="joinOk">
+        <table>
+          <tr id="join">
+            <td class="col1">아이디</td>
+            <td class="col2"><input type="text" name="mid"></td>
+          </tr>
+          <tr id="join">
+            <td class="col1">비밀번호</td>
+            <td class="col2"><input type="password" name="mpw"></td>
+          </tr>
+          <tr id="join">
+            <td class="col1">이름</td>
+            <td class="col2"><input type="text" name="mname"></td>
+          </tr>
+          <tr id="join">
+            <td class="col1">이메일</td>
+            <td class="col2"><input type="text" name="memail"></td>
+          </tr>
+        </table>
         <div id="buttons">
-          <a href="#"><img src="${pageContext.request.contextPath}/resources/img/delete.png"></a>
+          <input type="image" src="${pageContext.request.contextPath}/resources/img/ok.png"></a>
           <a href="board_list"><img src="${pageContext.request.contextPath}/resources/img/list.png"></a>
-          <a href="board_write"><img src="${pageContext.request.contextPath}/resources/img/write.png"></a>
         </div>
+        </form>
       </section> <!-- section main 끝 -->
     </main>
     <div class="clear"></div>

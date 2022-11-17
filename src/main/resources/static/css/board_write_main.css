@@ -35,6 +35,12 @@ section#main #name input {
     border:solid 1px #00ba2e;
 }
 
+section#main #join input {
+    width:200px;
+    height:16px;
+    border:solid 1px #00ba2e;
+}
+
 section#main #subject input {
     width:550px;
     height:16px;

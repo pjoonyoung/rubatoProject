@@ -64,7 +64,7 @@
     </aside>
     <main>
       <section id="main">
-        <img src="img/comm.gif">
+        <img src="${pageContext.request.contextPath}/resources/img/comm.gif">
         <h2 id="board_title">자유게시판</h2>
         <div id="write_title"><h2>글쓰기</h2></div>
         <table>
