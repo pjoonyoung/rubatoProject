@@ -1,6 +1,7 @@
 package com.joonyoung.rubato.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.joonyoung.rubato.dao.IDao;
+import com.joonyoung.rubato.dto.RMemberDto;
 
 @Controller
 public class HomeController {
@@ -60,4 +62,30 @@ public class HomeController {
 		
 		return "joinOk";
 	}
+	
+	@RequestMapping("loginOk")
+	public String loginOk(HttpServletRequest request, Model model, HttpSession session) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		String mid = request.getParameter("mid");
+		String mpw = request.getParameter("mpw");
+		
+		int checkIdFlag = dao.checkUserIdAndPw(mid, mpw);// 1이면 로그인Ok, 0이면 로그인x
+		
+		if(checkIdFlag == 1) {
+			session.setAttribute("mid", mid);
+		}
+		
+		return "redirect:index";
+	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		
+		session.invalidate();
+		
+		return "redirect:index";
+	}
+	
 }

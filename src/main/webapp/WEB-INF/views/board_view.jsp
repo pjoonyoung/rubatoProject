@@ -32,13 +32,15 @@
     <aside>
       <article id="login_box"> <!-- login box 시작 -->
         <img id="login_title" src="${pageContext.request.contextPath}/resources/img/ttl_login.png">
+        <form action="loginOk">
         <div id="input_button">
           <ul id="login_input">
-            <li><input type="text"></li>
-            <li><input type="password"></li>
+            <li><input type="text" name="mid"></li>
+            <li><input type="password" name="mpw"></li>
           </ul>
-          <img id="login_btn" src="${pageContext.request.contextPath}/resources/img/btn_login.gif">
+          <input type="image" id="login_btn" src="${pageContext.request.contextPath}/resources/img/btn_login.gif">
         </div>
+        </form>
         <div class="clear"></div>
         <div id="join_search">
           <img src="${pageContext.request.contextPath}/resources/img/btn_join.gif">

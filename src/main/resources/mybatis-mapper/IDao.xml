@@ -8,4 +8,12 @@
 	<insert id="joinMember">
 		INSERT INTO rubamember (mid, mpw, mname, memail) VALUES (#{param1}, #{param2}, #{param3}, #{param4})
 	</insert>
+	
+	<select id="checkUserId" resultType="int">
+		SELECT COUNT(*) FROM rubamember WHERE mid = #{param1}
+	</select>
+	
+	<select id="checkUserIdAndPw" resultType="int">
+		SELECT COUNT(*) FROM rubamember WHERE mid = #{param1} and mpw = #{param2}
+	</select>
 </mapper>
