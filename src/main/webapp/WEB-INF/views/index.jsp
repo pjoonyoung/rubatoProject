@@ -31,7 +31,7 @@
          | 
          
         <% if(sessionId == null){ %>
-         	JOIN
+         	<a href="member_join"> JOIN</a>
         <% } else { %>
         	LEVEL 7
 		<% } %>
@@ -69,7 +69,7 @@
         <div class="clear"></div>
         <% if(sessionId == null){ %>
         <div id="join_search">
-          <img src="${pageContext.request.contextPath}/resources/img/btn_join.gif">
+          <a href="member_join"><img src="${pageContext.request.contextPath}/resources/img/btn_join.gif"></a>
           <img src="${pageContext.request.contextPath}/resources/img/btn_search.gif">
         </div>
       	<% } else {%>

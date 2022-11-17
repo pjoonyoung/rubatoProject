@@ -49,7 +49,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping("joinOk")
-	public String joinOk(HttpServletRequest request) {
+	public String joinOk(HttpServletRequest request, HttpSession session) {
 		
 		IDao dao = sqlSession.getMapper(IDao.class);
 		
@@ -60,7 +60,9 @@ public class HomeController {
 		
 		dao.joinMember(mid, mpw, mname, memail);
 		
-		return "joinOk";
+		session.setAttribute("mid", mid);// 가입과 동시에 로그인
+		
+		return "redirect:index";
 	}
 	
 	@RequestMapping("loginOk")
