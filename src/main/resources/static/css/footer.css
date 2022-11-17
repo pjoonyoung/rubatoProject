@@ -1,0 +1,29 @@
+footer {
+    height:100px;
+    border-top:solid 1px #bbbbbb;
+    margin-top:30px;
+}
+
+footer #footer_logo {
+    float:left;
+    margin:5px 0 0 200px;
+}
+
+footer #address {
+    float:left;
+    margin:20px 0 0 50px;
+}
+
+footer #footer_sns {
+    float:right;
+    margin:20px 20px 0 0;
+}
+
+footer #footer_sns li {
+    display:inline;
+}
+
+footer #copyright {
+    font-size:11px;
+    color:gray;
+}

@@ -1,0 +1,48 @@
+aside #sub_menu {
+    background-image:url("../img/sub_menu_bg.png");
+    width:186px;
+    height:320px;
+
+    margin-top:15px;
+}
+
+aside #sub_menu ul {
+    padding:80px 0 0 30px;
+}
+
+aside #sub_menu li {
+    margin-top:10px;
+    font-size:14px;
+    color:#444444;
+    font-weight:bold;
+}
+
+aside #sub_menu a:link {
+    color:#444444;
+    text-decoration:none;
+}
+
+aside #sub_menu a:visited {
+    color:#444444;
+    text-decoration:none;
+}
+
+aside #sub_menu a:hover {
+    color:#2478FF;
+    text-decoration:underline;
+}
+
+aside #sub_banner {
+    width:186px;
+    height:160px;
+    border:solid 1px #cccccc;
+    border-radius:10px;
+    margin-top:15px;
+    padding:7px 0 0 7px;
+}
+
+
+
+
+
+

@@ -1,0 +1,160 @@
+aside {
+
+    width:190px;
+    float:left;
+}
+
+aside #login_box {
+    width:186px;
+    height:120px;
+    border:solid 1px #dddddd;
+    border-radius:10px;
+    background-color:#f3f3f3;
+}
+
+aside #login_input {
+    float:left;
+}
+
+aside #login_input input {
+    width:100px;
+    height:20px;
+    border:solid 1px #dddddd;
+}
+
+aside #login_title {
+    margin:10px 0 0 10px;
+}
+
+aside #input_button {
+    margin:10px 0 0 10px;
+}
+
+aside #login_btn {
+    margin:0 0 0 5px;
+}
+
+aside #join_search {
+    margin:10px 0 0 5px;
+}
+
+aside #guestbook {
+    width:190px;
+    height:135px;
+    border:solid 1px #cccccc;
+    border-radius:10px;
+    margin-top:15px;
+    background-color:#eeeeee;
+    box-shadow:2px 2px 5px #dddddd;
+}
+
+aside #guestbook_title {
+    width:165px;
+    border-bottom:solid 1px #cccccc;
+    padding:10px 0 0 5px;
+    margin:0 0 0 8px;
+}
+
+aside #guestbook li {
+    margin:5px 0 0 0;
+    list-style-image:url("../img/icon_blue.gif");
+}
+
+aside #guestbook ul {
+    margin:10px 0 0 40px;
+}
+
+section#main {
+    width:758px;
+
+    float:right;
+}
+
+section#main #notice_free_youtube {
+    height:250px;
+
+    position:relative;
+    margin-top:10px;
+}
+
+section#main #notice {
+    width:360px;
+
+    position:absolute;
+}
+
+section#main .latest_title {
+    border-bottom:solid 1px #cccccc;
+    padding:3px;
+}
+
+section#main .latest_img {
+    float:left;
+}
+
+section#main .more {
+    float:right;
+}
+
+section#main .image {
+    float:left;
+    margin:10px 0 0 20px;
+}
+
+section#main .list {
+    float:right;
+}
+
+section#main .list div {
+    float:left;
+}
+
+section#main .latest_content li {
+    padding:10px 0 10px 0;
+}
+
+section#main .subject {
+    width:170px;
+}
+
+section#main #freeBoard {
+    width:360px;
+    position:absolute;
+    top:120px;
+
+}
+
+section#main #youtube {
+    position:absolute;
+    left:380px;
+
+    width:365px;
+    height:250px;
+}
+
+section#main #youtube_img {
+    margin:10px 0 0 45px;
+}
+
+section#main #gallery_box {
+    width:750px;
+    height:210px;
+    border:solid 1px #cccccc;
+    border-radius:10px;
+    box-shadow:2px 2px 5px #dddddd;
+    margin:10px 0 0 5px;
+}
+
+section#main .items {
+    float:left;
+    margin-left:35px;
+    text-align:center;
+}
+
+section#main #gallery_list {
+    padding:25px 0 0 20px;
+}
+
+section#main .items li {
+    margin-top:5px;
+}
