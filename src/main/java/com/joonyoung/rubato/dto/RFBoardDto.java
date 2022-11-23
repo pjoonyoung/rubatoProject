@@ -17,5 +17,5 @@ public class RFBoardDto {
 	private int rfbhit;
 	private String rfbuserid;
 	private int rfbreplycount;
-	private String date;
+	private String rfbdate;
 }

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,10 +13,12 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 </head>
 <body>
-	<%
-		String sessionId = (String) session.getAttribute("mid");
-		//로그인 중이라면 로그인한 아이디가 저장되고 비로그인중이면 sessionId == null 임
+	<% 
+		String sessionId = (String) session.getAttribute("memberId");
+		//로그인중이라면 로그인한 아이디가 저장되고 비로그인 중이면 sessionId==null 임
 	%>
+
+
 
   <div id="wrap">
     <header> <!-- header 시작 -->
@@ -22,20 +26,20 @@
       <nav id="top_menu">
         HOME | 
         
-        <% if(sessionId == null){ %>
-        	LOGIN
-        <%} else { %>
-        	<a href="logout"> LOGOUT</a>
-        <%} %>
+        <% if(sessionId == null) { %>
+        LOGIN
+        <% } else { %>
+        <a href="logout">LOGOUT</a>
+        <% } %>
         
          | 
          
-        <% if(sessionId == null){ %>
-         	<a href="member_join"> JOIN</a>
-        <% } else { %>
-        	LEVEL 7
-		<% } %>
-          | NOTICE
+         <% if(sessionId == null) { %>
+         <a href="member_join">JOIN</a> 
+         <% } else { %>
+         LEVEL 7
+         <% } %>
+         | NOTICE
       </nav>
       <nav id="main_menu">
         <ul>
@@ -49,10 +53,9 @@
     </header> <!-- header 끝 -->
     <aside>
       <article id="login_box"> <!-- login box 시작 -->
-      	<% if(sessionId == null){ %>
         <img id="login_title" src="${pageContext.request.contextPath}/resources/img/ttl_login.png">
-        <% } %>
-        <% if(sessionId == null){ %>
+        
+         <% if(sessionId == null) { %>
         <form action="loginOk">
         <div id="input_button">
           <ul id="login_input">
@@ -62,19 +65,18 @@
           <input type="image" id="login_btn" src="${pageContext.request.contextPath}/resources/img/btn_login.gif">
         </div>
         </form>
-        <%} else { %>
-       	<br><%= sessionId %> 님 로그인중...<br>
-        <%} %>
-        
+        <% } else { %>
+        <br><%= sessionId %>님 로그인 중<br>        
+        <% } %>
         <div class="clear"></div>
-        <% if(sessionId == null){ %>
+        <% if(sessionId == null) { %>
         <div id="join_search">
           <a href="member_join"><img src="${pageContext.request.contextPath}/resources/img/btn_join.gif"></a>
           <img src="${pageContext.request.contextPath}/resources/img/btn_search.gif">
         </div>
-      	<% } else {%>
-      	<a href="logout">로그아웃</a>
-      	<% } %>
+        <% } else {%>
+        <a href="logout">로그아웃</a>
+        <% } %>
       </article> <!-- login box 끝 -->
       <article id="guestbook"> <!-- guestbook 시작 -->
         <div id="guestbook_title">
@@ -134,23 +136,67 @@
               <img class="image" src="${pageContext.request.contextPath}/resources/img/book_pen.gif">
               <ul class="list">
                 <li>
-                  <div class="subject">까스통님의 선물인 보드카...</div>
-                  <div class="date">2022-09-30</div>
+                  <div class="subject">
+                  <c:choose>
+                  	<c:when test="${fn:length(freeboard01.rfbtitle) >= 15 }">
+                  		<c:out value="${fn:substring(freeboard01.rfbtitle,0,14) }"></c:out>...
+                  	</c:when>
+             		<c:otherwise>
+             			<c:out value="${freeboard01.rfbtitle }"></c:out>
+             		</c:otherwise>
+				  </c:choose>
+                  </div>
+                  <div class="date">
+                  <c:out value="${fn:substring(freeboard01.rfbdate,0,10) }"></c:out>...
+                  </div>
                   <div class="clear"></div>
                 </li>
                 <li>
-                  <div class="subject">까스통님의 선물인 보드카...</div>
-                  <div class="date">2022-09-30</div>
+                  <div class="subject">
+                  <c:choose>
+                  	<c:when test="${fn:length(freeboard02.rfbtitle) >= 15 }">
+                  		<c:out value="${fn:substring(freeboard02.rfbtitle,0,14) }"></c:out>...
+                  	</c:when>
+             		<c:otherwise>
+             			<c:out value="${freeboard02.rfbtitle }"></c:out>
+             		</c:otherwise>
+				  </c:choose>
+                  </div>
+                  <div class="date">
+                  <c:out value="${fn:substring(freeboard02.rfbdate,0,10) }"></c:out>...
+                  </div>
                   <div class="clear"></div>
                 </li>
                 <li>
-                  <div class="subject">까스통님의 선물인 보드카...</div>
-                  <div class="date">2022-09-30</div>
+                  <div class="subject">
+                  <c:choose>
+                  	<c:when test="${fn:length(freeboard03.rfbtitle) >= 15 }">
+                  		<c:out value="${fn:substring(freeboard03.rfbtitle,0,14) }"></c:out>...
+                  	</c:when>
+             		<c:otherwise>
+             			<c:out value="${freeboard03.rfbtitle }"></c:out>
+             		</c:otherwise>
+				  </c:choose>
+                  </div>
+                  <div class="date">
+                  <c:out value="${fn:substring(freeboard03.rfbdate,0,10) }"></c:out>...
+                  </div>
                   <div class="clear"></div>
                 </li>
                 <li>
-                  <div class="subject">까스통님의 선물인 보드카...</div>
-                  <div class="date">2022-09-30</div>
+                  <div class="subject">
+                  <c:choose>
+                  	<c:when test="${fn:length(freeboard04.rfbtitle) >= 15 }">
+                  		<c:out value="${fn:substring(freeboard04.rfbtitle,0,14) }"></c:out>...
+                  	</c:when>
+             		<c:otherwise>
+             			<c:out value="${freeboard04.rfbtitle }"></c:out>
+             		</c:otherwise>
+				  </c:choose>
+                  </div>
+                  <div class="date">
+                  <c:out value="${fn:substring(freeboard04.rfbdate,0,10) }"></c:out>...
+                  </div>
                   <div class="clear"></div>
                 </li>
               </ul>

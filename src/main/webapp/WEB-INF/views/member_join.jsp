@@ -13,6 +13,11 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_write_main.css">
 </head>
 <body>
+	<% 
+		String sessionId = (String) session.getAttribute("memberId");
+		//로그인중이라면 로그인한 아이디가 저장되고 비로그인 중이면 sessionId==null 임
+	%>
+
   <div id="wrap">
     <header> <!-- header 시작 -->
       <a href="index"><img id="logo" src="${pageContext.request.contextPath}/resources/img/logo.png"></a>
@@ -32,6 +37,8 @@
     <aside>
       <article id="login_box"> <!-- login box 시작 -->
         <img id="login_title" src="${pageContext.request.contextPath}/resources/img/ttl_login.png">
+        
+         <% if(sessionId == null) { %>
         <form action="loginOk">
         <div id="input_button">
           <ul id="login_input">
@@ -41,11 +48,18 @@
           <input type="image" id="login_btn" src="${pageContext.request.contextPath}/resources/img/btn_login.gif">
         </div>
         </form>
+        <% } else { %>
+        <br><%= sessionId %>님 로그인 중<br>        
+        <% } %>
         <div class="clear"></div>
+        <% if(sessionId == null) { %>
         <div id="join_search">
-          <img src="${pageContext.request.contextPath}/resources/img/btn_join.gif">
+          <a href="member_join"><img src="${pageContext.request.contextPath}/resources/img/btn_join.gif"></a>
           <img src="${pageContext.request.contextPath}/resources/img/btn_search.gif">
         </div>
+        <% } else {%>
+        <a href="logout">로그아웃</a>
+        <% } %>
       </article> <!-- login box 끝 -->
       <nav id="sub_menu"> <!-- 서브 메뉴 시작 -->
         <ul>
@@ -77,7 +91,7 @@
           </tr>
           <tr id="join">
             <td class="col1">비밀번호</td>
-            <td class="col2"><input type="password" name="mpw"></td>
+            <td class="col2"><input type="text" name="mpw"></td>
           </tr>
           <tr id="join">
             <td class="col1">이름</td>
@@ -86,7 +100,7 @@
           <tr id="join">
             <td class="col1">이메일</td>
             <td class="col2"><input type="text" name="memail"></td>
-          </tr>
+          </tr>          
         </table>
         <div id="buttons">
           <input type="image" src="${pageContext.request.contextPath}/resources/img/ok.png"></a>
