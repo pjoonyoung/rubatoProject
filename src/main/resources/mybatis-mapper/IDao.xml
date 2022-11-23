@@ -23,9 +23,9 @@
 	
 	<insert id="rfbwrite">
 		INSERT INTO 
-			rubafreeboard(rfbnum, rfbname, rfbtitle, rfbcontent, rfbuserid, rfbhit, rfbreplycount) 
+			rubafreeboard(rfbnum, rfbname, rfbtitle, rfbcontent, rfbuserid, rfbhit, rfbreplycount, filecount) 
 		VALUES
-			(rfb_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, 0, 0)
+			(rfb_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, 0, 0, #{param5})
 	</insert>
 	
 	<select id="rfblist" resultType="com.joonyoung.rubato.dto.RFBoardDto">
@@ -51,8 +51,10 @@
 	<!-- 댓글 SQL -->
 	
 	<insert id="rrwrite">
-		INSERT INTO rubareply(rrnum, rrorinum, rrid, rrcontent) 
-		VALUES (rr_seq.nextval, #{param1}, #{param2}, #{param3})
+		INSERT INTO 
+			rubareply(rrnum, rrorinum, rrid, rrcontent) 
+		VALUES 
+			(rr_seq.nextval, #{param1}, #{param2}, #{param3})
 	</insert>
 	
 	<select id="rrlist" resultType="com.joonyoung.rubato.dto.RReplyDto">
@@ -84,4 +86,22 @@
 	<select id="rfbSearchWriterList" resultType="com.joonyoung.rubato.dto.RFBoardDto">
 		SELECT * FROM rubafreeboard WHERE rfbname LIKE '%' || #{param1} || '%' ORDER BY rfbnum DESC	
 	</select>
+	
+	<!-- 파일업로드 SQL -->
+	<insert id="fileInforInsert">
+		INSERT INTO 
+			rubafiles(filenum, boardnum, fileoriname, filename, fileextention, fileurl) 
+		VALUES 
+			(file_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, #{param5})
+	</insert>
+	
+	<select id="boardLatestInfo" resultType="com.joonyoung.rubato.dto.RFBoardDto">
+		SELECT * FROM rubafreeboard WHERE rfbuserid = #{param1} ORDER BY rfbnum DESC
+	</select>
+	
+	<select id="getFileInfo" resultType="com.joonyoung.rubato.dto.FileDto">
+		SELECT * FROM rubafiles WHERE boardnum = #{param1}
+	</select>
+	
+	
 </mapper>

@@ -82,7 +82,7 @@
         <img src="${pageContext.request.contextPath}/resources/img/comm.gif">
         <h2 id="board_title">자유게시판</h2>
         <div id="write_title"><h2>글쓰기</h2></div>
-        <form action="writeOk">
+        <form action="writeOk" method="post" enctype="multipart/form-data">
         <table>
           <tr id="name">
             <td class="col1">이름</td>

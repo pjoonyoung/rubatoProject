@@ -142,11 +142,17 @@
                 <a href="board_view?rfbnum=${freeboard.rfbnum }">
                   <div class="subject">
                   <c:choose>
-                  	<c:when test="${fn:length(freeboard.rfbtitle) >= 15 }">
-                  		<c:out value="${fn:substring(freeboard.rfbtitle,0,14) }"></c:out>...
+                  	<c:when test="${fn:length(freeboard.rfbtitle) >= 12 }">
+                  		<c:out value="${fn:substring(freeboard.rfbtitle,0,11) }"></c:out>...
+                  		<c:if test="${freeboard.rfbreplycount !=0 }">
+                  			&nbsp;[${freeboard.rfbreplycount }]
+                  		</c:if>
                   	</c:when>
              		<c:otherwise>
              			<c:out value="${freeboard.rfbtitle }"></c:out>
+             			<c:if test="${freeboard.rfbreplycount !=0 }">
+                  			&nbsp;[${freeboard.rfbreplycount }]
+                  		</c:if>
              		</c:otherwise>
 				  </c:choose>
                   </div>

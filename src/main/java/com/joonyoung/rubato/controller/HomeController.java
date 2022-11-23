@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.joonyoung.rubato.dao.IDao;
+import com.joonyoung.rubato.dto.FileDto;
 import com.joonyoung.rubato.dto.RFBoardDto;
 import com.joonyoung.rubato.dto.RMemberDto;
 import com.joonyoung.rubato.dto.RReplyDto;
@@ -88,8 +89,11 @@ public class HomeController {
 		RFBoardDto rfboardDto = dao.rfboardView(rfbnum);
 		ArrayList<RReplyDto> replyDtos =  dao.rrlist(rfbnum);
 		
+		FileDto filedto = dao.getFileInfo(rfbnum);
+		
 		model.addAttribute("rfbView", rfboardDto);
 		model.addAttribute("replylist", replyDtos);//해당 글에 달린 댓글 리스트
+		model.addAttribute("filedto", filedto);//해당 글에 첨부된 파일의 모든 정보 dto 전송
 		
 		return "board_view";
 	}
@@ -176,9 +180,12 @@ public class HomeController {
 		IDao dao = sqlSession.getMapper(IDao.class);
 		
 		if(files.isEmpty()) { //파일의 첨부여부를 확인
-			dao.rfbwrite(boardName, boardTitle, boardContent, sessionId);
+			dao.rfbwrite(boardName, boardTitle, boardContent, sessionId, 0);
 		} else {
-			dao.rfbwrite(boardName, boardTitle, boardContent, sessionId);
+			dao.rfbwrite(boardName, boardTitle, boardContent, sessionId, 1);
+			ArrayList<RFBoardDto> latestBoard = dao.boardLatestInfo(sessionId);
+			RFBoardDto dtos = latestBoard.get(0);
+			int rfbnum = dtos.getRfbnum();
 			
 			//파일 첨부
 			String fileoriname = files.getOriginalFilename();//첨부된 파일의 원래 이름
@@ -189,13 +196,18 @@ public class HomeController {
 			String fileurl = "C:/springboot_workspace/rubatoProject-2022-11-17/src/main/resources/static/uploadfiles/";
 			//첨부된 파일이 저장될 서버의 실재 폴더 경로
 			
+			do {
 			destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileextention;
 			//알파벳 대소문자와 숫자를 포함한 랜점 32자 문자열 생성 후 .을 구분자로 원본 파일의 확장자를 연결->실제 서버에 저장될 파일의 이름
 			
 			destinationFile = new File(fileurl+destinationFileName);
+			} while(destinationFile.exists()) ;
+			// 혹시 같은 이름의 파일 이름이 존재하는지 확인
 			
 			destinationFile.getParentFile().mkdir();
 			files.transferTo(destinationFile);
+			
+			dao.fileInforInsert(rfbnum, fileoriname, destinationFileName, fileextention, fileurl);
 		}
 		return "redirect:board_list";
 	}
@@ -293,4 +305,28 @@ public class HomeController {
 		return "board_list";
 	}
 	
+	@RequestMapping("file_down")
+		public String file_down(HttpServletRequest request, Model model, HttpServletResponse response) {
+		
+		IDao dao = sqlSession.getMapper(IDao.class);
+		
+		String rfbnum = request.getParameter("rfbnum");
+		
+		FileDto filedto = dao.getFileInfo(rfbnum);
+		
+		String filename = filedto.getFilename();
+		
+		PrintWriter out;
+		try {
+			response.setContentType("text/html;charset=utf-8");
+			out = response.getWriter();
+			out.println("<script>window.location.href='/resources/uploadfiles/" + filename + "'</script>");
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:board_list";
+	}
 }
