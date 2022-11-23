@@ -38,7 +38,13 @@ public class HomeController {
 		
 		List<RFBoardDto> boardDtos = dao.rfblist();// 전체 리스트 불러오기
 		
-		boardDtos = boardDtos.subList(0, 4);
+		int boardSize = boardDtos.size();// 전체 글의 개수
+		
+		if(boardSize >=4) {
+			boardDtos = boardDtos.subList(0, 4);
+		} else {
+			boardDtos = boardDtos.subList(0, boardSize);
+		}
 				
 //		model.addAttribute("freeboard01", boardDtos.get(0));
 //		model.addAttribute("freeboard02", boardDtos.get(1));
