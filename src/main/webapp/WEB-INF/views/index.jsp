@@ -137,78 +137,26 @@
             <div class="latest_content">
               <img class="image" src="${pageContext.request.contextPath}/resources/img/book_pen.gif">
               <ul class="list">
+              <c:forEach items="${boardDtos }" var="freeboard">
                 <li>
-                <a href="board_view?rfbnum=${freeboard01.rfbnum }">
+                <a href="board_view?rfbnum=${freeboard.rfbnum }">
                   <div class="subject">
                   <c:choose>
-                  	<c:when test="${fn:length(freeboard01.rfbtitle) >= 15 }">
-                  		<c:out value="${fn:substring(freeboard01.rfbtitle,0,14) }"></c:out>...
+                  	<c:when test="${fn:length(freeboard.rfbtitle) >= 15 }">
+                  		<c:out value="${fn:substring(freeboard.rfbtitle,0,14) }"></c:out>...
                   	</c:when>
              		<c:otherwise>
-             			<c:out value="${freeboard01.rfbtitle }"></c:out>
+             			<c:out value="${freeboard.rfbtitle }"></c:out>
              		</c:otherwise>
 				  </c:choose>
                   </div>
                 </a>
                   <div class="date">
-                  <c:out value="${fn:substring(freeboard01.rfbdate,0,10) }"></c:out>
+                  <c:out value="${fn:substring(freeboard.rfbdate,0,10) }"></c:out>
                   </div>
                   <div class="clear"></div>
                 </li>
-                <li>
-                <a href="board_view?rfbnum=${freeboard02.rfbnum }">
-                  <div class="subject">
-                  <c:choose>
-                  	<c:when test="${fn:length(freeboard02.rfbtitle) >= 15 }">
-                  		<c:out value="${fn:substring(freeboard02.rfbtitle,0,14) }"></c:out>...
-                  	</c:when>
-             		<c:otherwise>
-             			<c:out value="${freeboard02.rfbtitle }"></c:out>
-             		</c:otherwise>
-				  </c:choose>
-                  </div>
-                  </a>
-                  <div class="date">
-                  <c:out value="${fn:substring(freeboard02.rfbdate,0,10) }"></c:out>
-                  </div>
-                  <div class="clear"></div>
-                </li>
-                <li>
-                <a href="board_view?rfbnum=${freeboard03.rfbnum }">
-                  <div class="subject">
-                  <c:choose>
-                  	<c:when test="${fn:length(freeboard03.rfbtitle) >= 15 }">
-                  		<c:out value="${fn:substring(freeboard03.rfbtitle,0,14) }"></c:out>...
-                  	</c:when>
-             		<c:otherwise>
-             			<c:out value="${freeboard03.rfbtitle }"></c:out>
-             		</c:otherwise>
-				  </c:choose>
-                  </div>
-                  </a>
-                  <div class="date">
-                  <c:out value="${fn:substring(freeboard03.rfbdate,0,10) }"></c:out>
-                  </div>
-                  <div class="clear"></div>
-                </li>
-                <li>
-                <a href="board_view?rfbnum=${freeboard04.rfbnum }">
-                  <div class="subject">
-                  <c:choose>
-                  	<c:when test="${fn:length(freeboard04.rfbtitle) >= 15 }">
-                  		<c:out value="${fn:substring(freeboard04.rfbtitle,0,14) }"></c:out>...
-                  	</c:when>
-             		<c:otherwise>
-             			<c:out value="${freeboard04.rfbtitle }"></c:out>
-             		</c:otherwise>
-				  </c:choose>
-                  </div>
-                  </a>
-                  <div class="date">
-                  <c:out value="${fn:substring(freeboard04.rfbdate,0,10) }"></c:out>
-                  </div>
-                  <div class="clear"></div>
-                </li>
+                </c:forEach>
               </ul>
             </div>
           </article> <!-- 자유게시판 끝 -->

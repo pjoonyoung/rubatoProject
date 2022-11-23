@@ -3,6 +3,7 @@ package com.joonyoung.rubato.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,17 +26,26 @@ public class HomeController {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	@RequestMapping(value = "/")
+	public String home() {
+		return "redirect:index";
+	}
+	
 	@RequestMapping(value = "index")
 	public String index(Model model) {
 		
 		IDao dao = sqlSession.getMapper(IDao.class);
 		
-		ArrayList<RFBoardDto> boardDtos = dao.rfblist();// 전체 리스트 불러오기
+		List<RFBoardDto> boardDtos = dao.rfblist();// 전체 리스트 불러오기
 		
-		model.addAttribute("freeboard01", boardDtos.get(0));
-		model.addAttribute("freeboard02", boardDtos.get(1));
-		model.addAttribute("freeboard03", boardDtos.get(2));
-		model.addAttribute("freeboard04", boardDtos.get(3));
+		boardDtos = boardDtos.subList(0, 4);
+				
+//		model.addAttribute("freeboard01", boardDtos.get(0));
+//		model.addAttribute("freeboard02", boardDtos.get(1));
+//		model.addAttribute("freeboard03", boardDtos.get(2));
+//		model.addAttribute("freeboard04", boardDtos.get(3));
+		
+		model.addAttribute("boardDtos", boardDtos);
 		
 		return "index";
 	}
