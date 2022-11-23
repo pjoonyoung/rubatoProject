@@ -1,5 +1,6 @@
 package com.joonyoung.rubato.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -9,11 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.joonyoung.rubato.dao.IDao;
 import com.joonyoung.rubato.dto.RFBoardDto;
@@ -159,7 +164,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "writeOk")
-	public String writeOk(HttpServletRequest request, HttpSession session) {
+	public String writeOk(HttpServletRequest request, HttpSession session, @RequestPart MultipartFile files) throws IllegalStateException, IOException {
 		
 		String boardName = request.getParameter("rfbname");
 		String boardTitle = request.getParameter("rfbtitle");
@@ -170,8 +175,28 @@ public class HomeController {
 		
 		IDao dao = sqlSession.getMapper(IDao.class);
 		
-		dao.rfbwrite(boardName, boardTitle, boardContent, sessionId);
-		
+		if(files.isEmpty()) { //파일의 첨부여부를 확인
+			dao.rfbwrite(boardName, boardTitle, boardContent, sessionId);
+		} else {
+			dao.rfbwrite(boardName, boardTitle, boardContent, sessionId);
+			
+			//파일 첨부
+			String fileoriname = files.getOriginalFilename();//첨부된 파일의 원래 이름
+			String fileextention = FilenameUtils.getExtension(fileoriname).toLowerCase();
+			//첨부된 파일의 확장자 추출 후 소문자로 강제 변경 
+			File destinationFile;//java.io 패키지 제공 클래스 임포트
+			String destinationFileName;// 실제 서버에 저장된 파일의 변경된 이름이 저장될 변수 선언
+			String fileurl = "C:/springboot_workspace/rubatoProject-2022-11-17/src/main/resources/static/uploadfiles/";
+			//첨부된 파일이 저장될 서버의 실재 폴더 경로
+			
+			destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileextention;
+			//알파벳 대소문자와 숫자를 포함한 랜점 32자 문자열 생성 후 .을 구분자로 원본 파일의 확장자를 연결->실제 서버에 저장될 파일의 이름
+			
+			destinationFile = new File(fileurl+destinationFileName);
+			
+			destinationFile.getParentFile().mkdir();
+			files.transferTo(destinationFile);
+		}
 		return "redirect:board_list";
 	}
 	
